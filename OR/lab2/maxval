@@ -1,0 +1,20 @@
+public class maxval {
+
+    public static void main (String[] args) {
+      int sum =0, max = 0, x1 = 0, x2 = 0;
+
+        for (int i = 0 ; i <= 4; i++){
+            for (int j = 0; j <=4; j++){
+                sum =3 * i + 2 * j;
+                if (sum > max && i+j <= 4) {
+                    max = sum;
+                    x1 = i;
+                    x2 = j;
+                }
+            }
+        }
+          System.out.println("Values of x1 and x2 are: " + x1 + ", " + x2);
+        System.out.println("Maximum value is: " + max);
+      
+    }
+}
