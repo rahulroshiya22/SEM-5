@@ -1,0 +1,59 @@
+import java.util.Scanner;
+public class nwcproblem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of rows: ");
+        int row = sc.nextInt();
+        System.out.print("Enter number of columns: ");
+        int col = sc.nextInt();
+
+        int[][] matrix = new int[row][col];
+        System.out.println("Enter the cost matrix:");
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+
+        int demand[] = new int[col];
+        System.out.print("Enter demand for each column: ");
+        for (int i = 0; i < col; i++) {
+            demand[i] = sc.nextInt();
+        }
+
+        int supply[] = new int[row];
+        System.out.print("Enter supply for each row: ");
+        for (int i = 0; i < row; i++) {
+            supply[i] = sc.nextInt();
+        }
+
+        int[][] result = new int[row][col];
+        int totalCost = 0;
+        int i = 0, j = 0;
+        while (i < row && j < col) {
+            int min = Math.min(supply[i], demand[j]);
+            result[i][j] = min;
+            totalCost += min * matrix[i][j];
+            supply[i] -= min;
+            demand[j] -= min;
+
+            if (supply[i] == 0) {
+                i++;
+            }
+            if (demand[j] == 0) {
+                j++;
+            }
+        }
+
+        System.out.println("Optimal Allocation:");
+        for (int x = 0; x < row; x++) {
+            for (int y = 0; y < col; y++) {
+                System.out.print(result[x][y] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("Total Cost: " + totalCost);
+        sc.close();
+    }
+}
